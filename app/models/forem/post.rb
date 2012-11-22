@@ -15,7 +15,7 @@ module Forem
     # Used in the moderation tools partial
     attr_accessor :moderation_option
 
-    attr_accessible :text, :reply_to_id
+    attr_accessible :text, :reply_to_id, :photo
 
     belongs_to :topic
     belongs_to :user,     :class_name => Forem.user_class.to_s
@@ -36,6 +36,8 @@ module Forem
     after_save :approve_user,   :if => :approved?
     after_save :blacklist_user, :if => :spam?
     after_save :email_topic_subscribers, :if => Proc.new { |p| p.approved? && !p.notified? }
+
+		has_attached_file :photo
 
     class << self
       def approved

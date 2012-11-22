@@ -1,4 +1,4 @@
-<%= simple_form_for [forem, @forum, @topic] do |f| %>
+<%= simple_form_for [forem, @forum, @topic], :html => { :multipart => true } do |f| %>
   <%= f.input :subject %>
 
   <%= f.simple_fields_for :posts do |post| %>
